@@ -22,17 +22,7 @@ import (
 	"github.com/chenquan/sqlplus"
 )
 
-type Driver struct {
-	driver.Driver
-	sqlplus.Hook
-}
-
-func NewDriver(c Config, d driver.Driver) *Driver {
+func NewDriver(c Config, d driver.Driver) driver.Driver {
 	StartAgent(c)
-
-	h := &Hook{c: c}
-	return &Driver{
-		Driver: sqlplus.New(d, h),
-		Hook:   h,
-	}
+	return sqlplus.New(d, NewTraceHook(c))
 }
