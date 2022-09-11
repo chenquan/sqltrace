@@ -32,7 +32,7 @@ var (
 	_                         sqlplus.Hook = (*Hook)(nil)
 	sqlMethodAttributeKey                  = attribute.Key("sql.method")
 	sqlAttributeKey                        = attribute.Key("sql")
-	sqlArgsLengthAttributeKey              = attribute.Key("sql.argsLength")
+	sqlArgsLengthAttributeKey              = attribute.Key("sql.args_length")
 )
 
 type (
@@ -141,7 +141,6 @@ func (h *Hook) AfterQueryContext(ctx context.Context, query string, args []drive
 func (h *Hook) BeforePrepareContext(ctx context.Context, query string) (context.Context, error) {
 	ctx, span := h.startSpan(ctx, "prepare")
 	span.SetAttributes(sqlAttributeKey.String(query))
-	span.SetAttributes(sqlArgsLengthAttributeKey.Int(len(query)))
 
 	var err error
 	if h.hook != nil {
