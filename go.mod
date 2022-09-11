@@ -3,7 +3,7 @@ module github.com/chenquan/sqltrace
 go 1.16
 
 require (
-	github.com/chenquan/sqlplus v0.0.0-20220910112912-5399e2373a27 // indirect
+	github.com/chenquan/sqlplus v0.0.0-20220911035050-a6ace2501a01 // indirect
 	go.opentelemetry.io/otel v1.9.0
 	go.opentelemetry.io/otel/exporters/jaeger v1.9.0
 	go.opentelemetry.io/otel/exporters/zipkin v1.9.0
