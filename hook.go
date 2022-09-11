@@ -61,14 +61,14 @@ func (h *Hook) BeforeConnect(ctx context.Context) (context.Context, error) {
 	return ctx, err
 }
 
-func (h *Hook) AfterConnect(ctx context.Context, err error) (context.Context, error) {
+func (h *Hook) AfterConnect(ctx context.Context, dc driver.Conn, err error) (context.Context, driver.Conn, error) {
 	h.endSpan(ctx, err)
 
 	if h.hook != nil {
-		ctx, err = h.hook.AfterConnect(ctx, err)
+		ctx, dc, err = h.hook.AfterConnect(ctx, dc, err)
 	}
 
-	return ctx, err
+	return ctx, dc, err
 }
 
 func (h *Hook) BeforeExecContext(ctx context.Context, query string, args []driver.NamedValue) (context.Context, error) {
@@ -84,14 +84,14 @@ func (h *Hook) BeforeExecContext(ctx context.Context, query string, args []drive
 	return ctx, err
 }
 
-func (h *Hook) AfterExecContext(ctx context.Context, query string, args []driver.NamedValue, err error) (context.Context, error) {
+func (h *Hook) AfterExecContext(ctx context.Context, query string, args []driver.NamedValue, r driver.Result, err error) (context.Context, driver.Result, error) {
 	h.endSpan(ctx, err)
 
 	if h.hook != nil {
-		ctx, err = h.hook.AfterExecContext(ctx, query, args, err)
+		ctx, r, err = h.hook.AfterExecContext(ctx, query, args, r, err)
 	}
 
-	return ctx, err
+	return ctx, r, err
 }
 
 func (h *Hook) BeforeBeginTx(ctx context.Context, opts driver.TxOptions) (context.Context, error) {
@@ -105,14 +105,14 @@ func (h *Hook) BeforeBeginTx(ctx context.Context, opts driver.TxOptions) (contex
 	return ctx, err
 }
 
-func (h *Hook) AfterBeginTx(ctx context.Context, opts driver.TxOptions, err error) (context.Context, error) {
+func (h *Hook) AfterBeginTx(ctx context.Context, opts driver.TxOptions, dd driver.Tx, err error) (context.Context, driver.Tx, error) {
 	h.endSpan(ctx, err)
 
 	if h.hook != nil {
-		ctx, err = h.hook.AfterBeginTx(ctx, opts, err)
+		ctx, dd, err = h.hook.AfterBeginTx(ctx, opts, dd, err)
 	}
 
-	return ctx, err
+	return ctx, dd, err
 }
 
 func (h *Hook) BeforeQueryContext(ctx context.Context, query string, args []driver.NamedValue) (context.Context, error) {
@@ -128,14 +128,14 @@ func (h *Hook) BeforeQueryContext(ctx context.Context, query string, args []driv
 	return ctx, err
 }
 
-func (h *Hook) AfterQueryContext(ctx context.Context, query string, args []driver.NamedValue, err error) (context.Context, error) {
+func (h *Hook) AfterQueryContext(ctx context.Context, query string, args []driver.NamedValue, rows driver.Rows, err error) (context.Context, driver.Rows, error) {
 	h.endSpan(ctx, err)
 
 	if h.hook != nil {
-		ctx, err = h.hook.AfterQueryContext(ctx, query, args, err)
+		ctx, rows, err = h.hook.AfterQueryContext(ctx, query, args, rows, err)
 	}
 
-	return ctx, err
+	return ctx, rows, err
 }
 
 func (h *Hook) BeforePrepareContext(ctx context.Context, query string) (context.Context, error) {
@@ -151,14 +151,14 @@ func (h *Hook) BeforePrepareContext(ctx context.Context, query string) (context.
 	return ctx, err
 }
 
-func (h *Hook) AfterPrepareContext(ctx context.Context, query string, err error) (context.Context, error) {
+func (h *Hook) AfterPrepareContext(ctx context.Context, query string, s driver.Stmt, err error) (context.Context, driver.Stmt, error) {
 	h.endSpan(ctx, err)
 
 	if h.hook != nil {
-		ctx, err = h.hook.AfterPrepareContext(ctx, query, err)
+		ctx, s, err = h.hook.AfterPrepareContext(ctx, query, s, err)
 	}
 
-	return ctx, err
+	return ctx, s, err
 }
 
 func (h *Hook) BeforeCommit(ctx context.Context) (context.Context, error) {
@@ -216,14 +216,14 @@ func (h *Hook) BeforeStmtQueryContext(ctx context.Context, query string, args []
 	return ctx, err
 }
 
-func (h *Hook) AfterStmtQueryContext(ctx context.Context, query string, args []driver.NamedValue, err error) (context.Context, error) {
+func (h *Hook) AfterStmtQueryContext(ctx context.Context, query string, args []driver.NamedValue, rows driver.Rows, err error) (context.Context, driver.Rows, error) {
 	h.endSpan(ctx, err)
 
 	if h.hook != nil {
-		ctx, err = h.hook.AfterStmtQueryContext(ctx, query, args, err)
+		ctx, rows, err = h.hook.AfterStmtQueryContext(ctx, query, args, rows, err)
 	}
 
-	return ctx, err
+	return ctx, rows, err
 }
 
 func (h *Hook) BeforeStmtExecContext(ctx context.Context, query string, args []driver.NamedValue) (context.Context, error) {
@@ -239,14 +239,14 @@ func (h *Hook) BeforeStmtExecContext(ctx context.Context, query string, args []d
 	return ctx, err
 }
 
-func (h *Hook) AfterStmtExecContext(ctx context.Context, query string, args []driver.NamedValue, err error) (context.Context, error) {
+func (h *Hook) AfterStmtExecContext(ctx context.Context, query string, args []driver.NamedValue, r driver.Result, err error) (context.Context, driver.Result, error) {
 	h.endSpan(ctx, err)
 
 	if h.hook != nil {
-		ctx, err = h.hook.AfterStmtExecContext(ctx, query, args, err)
+		ctx, r, err = h.hook.AfterStmtExecContext(ctx, query, args, r, err)
 	}
 
-	return ctx, err
+	return ctx, r, err
 }
 
 func (h *Hook) startSpan(ctx context.Context, method string) (context.Context, trace.Span) {
