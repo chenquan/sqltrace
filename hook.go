@@ -50,10 +50,10 @@ func NewTraceHook(c Config) *Hook {
 	return &Hook{c: c}
 }
 
-func (h *Hook) BeforeConnect(ctx context.Context) (context.Context, error) {
+func (h *Hook) BeforeConnect(ctx context.Context, err error) (context.Context, error) {
 	ctx, _ = h.startSpan(ctx, "connect")
 
-	return ctx, nil
+	return ctx, err
 }
 
 func (h *Hook) AfterConnect(ctx context.Context, dc driver.Conn, err error) (context.Context, driver.Conn, error) {
@@ -62,63 +62,63 @@ func (h *Hook) AfterConnect(ctx context.Context, dc driver.Conn, err error) (con
 	return ctx, dc, err
 }
 
-func (h *Hook) BeforeExecContext(ctx context.Context, query string, args []driver.NamedValue) (context.Context, error) {
+func (h *Hook) BeforeExecContext(ctx context.Context, query string, args []driver.NamedValue, err error) (context.Context, string, []driver.NamedValue, error) {
 	ctx, span := h.startSpan(ctx, "exec")
 	span.SetAttributes(sqlAttributeKey.String(query))
 	span.SetAttributes(sqlArgsLengthAttributeKey.Int(len(args)))
 
-	return ctx, nil
+	return ctx, query, args, err
 }
 
-func (h *Hook) AfterExecContext(ctx context.Context, query string, args []driver.NamedValue, r driver.Result, err error) (context.Context, driver.Result, error) {
+func (h *Hook) AfterExecContext(ctx context.Context, _ string, _ []driver.NamedValue, r driver.Result, err error) (context.Context, driver.Result, error) {
 	h.endSpan(ctx, err)
 
 	return ctx, r, err
 }
 
-func (h *Hook) BeforeBeginTx(ctx context.Context, opts driver.TxOptions) (context.Context, error) {
+func (h *Hook) BeforeBeginTx(ctx context.Context, opts driver.TxOptions, err error) (context.Context, driver.TxOptions, error) {
 	ctx, _ = h.startSpan(ctx, "begin")
 
-	return ctx, nil
+	return ctx, opts, err
 }
 
-func (h *Hook) AfterBeginTx(ctx context.Context, opts driver.TxOptions, dd driver.Tx, err error) (context.Context, driver.Tx, error) {
+func (h *Hook) AfterBeginTx(ctx context.Context, _ driver.TxOptions, dd driver.Tx, err error) (context.Context, driver.Tx, error) {
 	h.endSpan(ctx, err)
 
 	return ctx, dd, err
 }
 
-func (h *Hook) BeforeQueryContext(ctx context.Context, query string, args []driver.NamedValue) (context.Context, error) {
+func (h *Hook) BeforeQueryContext(ctx context.Context, query string, args []driver.NamedValue, err error) (context.Context, string, []driver.NamedValue, error) {
 	ctx, span := h.startSpan(ctx, "query")
 	span.SetAttributes(sqlAttributeKey.String(query))
 	span.SetAttributes(sqlArgsLengthAttributeKey.Int(len(args)))
 
-	return ctx, nil
+	return ctx, query, args, err
 }
 
-func (h *Hook) AfterQueryContext(ctx context.Context, query string, args []driver.NamedValue, rows driver.Rows, err error) (context.Context, driver.Rows, error) {
+func (h *Hook) AfterQueryContext(ctx context.Context, _ string, _ []driver.NamedValue, rows driver.Rows, err error) (context.Context, driver.Rows, error) {
 	h.endSpan(ctx, err)
 
 	return ctx, rows, err
 }
 
-func (h *Hook) BeforePrepareContext(ctx context.Context, query string) (context.Context, error) {
+func (h *Hook) BeforePrepareContext(ctx context.Context, query string, err error) (context.Context, string, error) {
 	ctx, span := h.startSpan(ctx, "prepare")
 	span.SetAttributes(sqlAttributeKey.String(query))
 
-	return ctx, nil
+	return ctx, query, err
 }
 
-func (h *Hook) AfterPrepareContext(ctx context.Context, query string, s driver.Stmt, err error) (context.Context, driver.Stmt, error) {
+func (h *Hook) AfterPrepareContext(ctx context.Context, _ string, s driver.Stmt, err error) (context.Context, driver.Stmt, error) {
 	h.endSpan(ctx, err)
 
 	return ctx, s, err
 }
 
-func (h *Hook) BeforeCommit(ctx context.Context) (context.Context, error) {
+func (h *Hook) BeforeCommit(ctx context.Context, err error) (context.Context, error) {
 	ctx, _ = h.startSpan(ctx, "commit")
 
-	return ctx, nil
+	return ctx, err
 }
 
 func (h *Hook) AfterCommit(ctx context.Context, err error) (context.Context, error) {
@@ -127,10 +127,10 @@ func (h *Hook) AfterCommit(ctx context.Context, err error) (context.Context, err
 	return ctx, err
 }
 
-func (h *Hook) BeforeRollback(ctx context.Context) (context.Context, error) {
+func (h *Hook) BeforeRollback(ctx context.Context, err error) (context.Context, error) {
 	ctx, _ = h.startSpan(ctx, "rollback")
 
-	return ctx, nil
+	return ctx, err
 }
 
 func (h *Hook) AfterRollback(ctx context.Context, err error) (context.Context, error) {
@@ -139,29 +139,29 @@ func (h *Hook) AfterRollback(ctx context.Context, err error) (context.Context, e
 	return ctx, err
 }
 
-func (h *Hook) BeforeStmtQueryContext(ctx context.Context, query string, args []driver.NamedValue) (context.Context, error) {
+func (h *Hook) BeforeStmtQueryContext(ctx context.Context, query string, args []driver.NamedValue, err error) (context.Context, []driver.NamedValue, error) {
 	ctx, span := h.startSpan(ctx, "stmtQuery")
 	span.SetAttributes(sqlAttributeKey.String(query))
 	span.SetAttributes(sqlArgsLengthAttributeKey.Int(len(args)))
 
-	return ctx, nil
+	return ctx, args, err
 }
 
-func (h *Hook) AfterStmtQueryContext(ctx context.Context, query string, args []driver.NamedValue, rows driver.Rows, err error) (context.Context, driver.Rows, error) {
+func (h *Hook) AfterStmtQueryContext(ctx context.Context, _ string, _ []driver.NamedValue, rows driver.Rows, err error) (context.Context, driver.Rows, error) {
 	h.endSpan(ctx, err)
 
 	return ctx, rows, err
 }
 
-func (h *Hook) BeforeStmtExecContext(ctx context.Context, query string, args []driver.NamedValue) (context.Context, error) {
+func (h *Hook) BeforeStmtExecContext(ctx context.Context, query string, args []driver.NamedValue, err error) (context.Context, []driver.NamedValue, error) {
 	ctx, span := h.startSpan(ctx, "stmtExec")
 	span.SetAttributes(sqlAttributeKey.String(query))
 	span.SetAttributes(sqlArgsLengthAttributeKey.Int(len(args)))
 
-	return ctx, nil
+	return ctx, args, err
 }
 
-func (h *Hook) AfterStmtExecContext(ctx context.Context, query string, args []driver.NamedValue, r driver.Result, err error) (context.Context, driver.Result, error) {
+func (h *Hook) AfterStmtExecContext(ctx context.Context, _ string, _ []driver.NamedValue, r driver.Result, err error) (context.Context, driver.Result, error) {
 	h.endSpan(ctx, err)
 
 	return ctx, r, err
@@ -169,9 +169,15 @@ func (h *Hook) AfterStmtExecContext(ctx context.Context, query string, args []dr
 
 func (h *Hook) startSpan(ctx context.Context, method string) (context.Context, trace.Span) {
 	tracer := otel.GetTracerProvider().Tracer(h.c.Name)
+	prepareContext := sqlplus.PrepareContextFromContext(ctx)
+	spanStartOptions := []trace.SpanStartOption{trace.WithSpanKind(trace.SpanKindClient)}
+	if prepareContext != nil {
+		spanStartOptions = append(spanStartOptions, trace.WithLinks(trace.LinkFromContext(prepareContext)))
+	}
+
 	start, span := tracer.Start(ctx,
 		spanName,
-		trace.WithSpanKind(trace.SpanKindClient),
+		spanStartOptions...,
 	)
 	span.SetAttributes(sqlMethodAttributeKey.String(method))
 
