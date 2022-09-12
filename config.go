@@ -23,9 +23,10 @@ type (
 	}
 	// Trace represents a tracing configuration.
 	Trace struct {
-		Name     string  `yaml:"name"`
-		Endpoint string  `yaml:"endpoint"`
-		Sampler  float64 `yaml:"sampler"`
-		Batcher  string  `yaml:"batcher"  validate:"eq=jaeger|eq=zipkin|eq="` // jaeger|zipkin
+		Name           string  `yaml:"name"`
+		DataSourceName string  `yaml:"dataSourceName"`
+		Endpoint       string  `yaml:"endpoint"`
+		Sampler        float64 `yaml:"sampler"`
+		Batcher        string  `yaml:"batcher"  validate:"eq=jaeger|eq=zipkin|eq="` // jaeger|zipkin
 	}
 )

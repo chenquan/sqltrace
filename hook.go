@@ -25,6 +25,7 @@ import (
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
+	semconv "go.opentelemetry.io/otel/semconv/v1.7.0"
 	"go.opentelemetry.io/otel/trace"
 )
 
@@ -169,10 +170,19 @@ func (h *Hook) AfterStmtExecContext(ctx context.Context, _ string, _ []driver.Na
 
 func (h *Hook) startSpan(ctx context.Context, method string) (context.Context, trace.Span) {
 	tracer := otel.GetTracerProvider().Tracer(h.c.Name)
+	spanStartOptions := []trace.SpanStartOption{
+		trace.WithSpanKind(trace.SpanKindClient),
+		trace.WithAttributes(semconv.DBSystemKey.String(h.c.DataSourceName)),
+	}
+
 	prepareContext := sqlplus.PrepareContextFromContext(ctx)
-	spanStartOptions := []trace.SpanStartOption{trace.WithSpanKind(trace.SpanKindClient)}
 	if prepareContext != nil {
 		spanStartOptions = append(spanStartOptions, trace.WithLinks(trace.LinkFromContext(prepareContext)))
+	}
+
+	txContext := sqlplus.TxContextFromContext(ctx)
+	if txContext != nil {
+		spanStartOptions = append(spanStartOptions, trace.WithLinks(trace.LinkFromContext(txContext)))
 	}
 
 	start, span := tracer.Start(ctx,
