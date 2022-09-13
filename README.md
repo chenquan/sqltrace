@@ -1,7 +1,7 @@
 # sqltrace
 
 A low-code intrusion SQL tracing library, suitable for any relational database (Sqlite3, MySQL, Oracle, SQL Server,
-PostgreSQL, TiDB, etc.) and ORM libraries for various relational data (gorm, xorm, sqlx, etc.)
+PostgreSQL, TiDB, etc.) and ORM libraries for various relational database (gorm, xorm, sqlx, etc.)
 
 # 😜installation
 
