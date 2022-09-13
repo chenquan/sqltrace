@@ -3,13 +3,13 @@
 A low-code intrusion SQL tracing library, suitable for any relational database (Sqlite3, MySQL, Oracle, SQL Server,
 PostgreSQL, TiDB, etc.) and ORM libraries for various relational data (gorm, xorm, sqlx, etc.)
 
-# installation
+# 😜installation
 
 ```shell
 go get -u github.com/chenquan/sqltrace
 ```
 
-# usage
+# 👏how to use
 
 ## native
 
@@ -163,3 +163,6 @@ func main() {
 ```
 
 ![](images/trace-gorm.png)
+
+# ⭐star
+If you like or are using this project to learn or start your solution, please give it a star⭐. Thanks!
