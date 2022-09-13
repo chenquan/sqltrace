@@ -30,13 +30,13 @@ import (
 
 func main() {
 	// Create a sqlite3 driver with link tracking
-	driver := sqltrace.NewDriver(sqltrace.Config{Trace: sqltrace.Trace{
+	driver := sqltrace.NewDriver(sqltrace.Config{
 		Name:           "sqlite3_trace",
 		DataSourceName: "sqlite3",
 		Endpoint:       "http://localhost:14268/api/traces",
 		Sampler:        1,
 		Batcher:        "jaeger",
-	}}, &sqlite3.SQLiteDriver{})
+	}, &sqlite3.SQLiteDriver{})
 	defer sqltrace.StopAgent()
 
 	// register new driver
@@ -104,13 +104,13 @@ import (
 
 func main() {
 	// Create a sqlite3 driver with link tracking
-	driver := sqltrace.NewDriver(sqltrace.Config{Trace: sqltrace.Trace{
+	driver := sqltrace.NewDriver(sqltrace.Config{
 		Name:           "sqlite3_trace",
 		DataSourceName: "sqlite3",
 		Endpoint:       "http://localhost:14268/api/traces",
 		Sampler:        1,
 		Batcher:        "jaeger",
-	}}, &sqlite3.SQLiteDriver{})
+	}, &sqlite3.SQLiteDriver{})
 	defer sqltrace.StopAgent()
 
 	// register new driver
