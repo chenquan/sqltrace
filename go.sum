@@ -16,6 +16,8 @@ github.com/chenquan/sqlplus v0.0.0-20220911140200-5e962d2e0609 h1:PwY9AcytH2wO18
 github.com/chenquan/sqlplus v0.0.0-20220911140200-5e962d2e0609/go.mod h1:5CnLnO6rlxUVA06pZVNkaV1hvm1rSPhEYCNbf41etkU=
 github.com/chenquan/sqlplus v0.0.0-20220912033524-7123fbfea9fa h1:mvZ4YeJQYjkVLwGJ+23KBez9BlDlcgMys0P5cxwQyCM=
 github.com/chenquan/sqlplus v0.0.0-20220912033524-7123fbfea9fa/go.mod h1:5CnLnO6rlxUVA06pZVNkaV1hvm1rSPhEYCNbf41etkU=
+github.com/chenquan/sqlplus v0.0.0-20220913091454-c741acdb8c89 h1:2eYPdqxS+WNQ+BrwNsnrL7/wmbRO95AW9QMolbJMbS4=
+github.com/chenquan/sqlplus v0.0.0-20220913091454-c741acdb8c89/go.mod h1:5CnLnO6rlxUVA06pZVNkaV1hvm1rSPhEYCNbf41etkU=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod h1:M8M6+tZqaGXZJjfX53e64911xZQV5JYwmTeXPW+k8Sc=
 github.com/cncf/udpa/go v0.0.0-20201120205902-5459f2c99403/go.mod h1:WmhPx2Nbnhtbo57+VJT5O0JRkEi1Wbu0z5j0R8u5Hbk=
