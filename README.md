@@ -1,7 +1,7 @@
 # sqltrace
 
-A sql tracing library, suitable for any relational database such as Sqlite3, MySQL, Oracle, SQL Server, PostgreSQL,
-TiDB, etc.
+A low-code intrusion SQL tracing library, suitable for any relational database (Sqlite3, MySQL, Oracle, SQL Server,
+PostgreSQL, TiDB) and ORM libraries for various relational data (gorm, xorm, sqlx, etc.)
 
 # installation
 
@@ -11,7 +11,7 @@ go get -u github.com/chenquan/sqltrace
 
 # usage
 
-native:
+## native
 
 ```go
 package main
@@ -84,7 +84,7 @@ func main() {
 
 ![](images/trace-native.png)
 
-gorm:
+## gorm
 
 ```go
 package main
