@@ -170,7 +170,7 @@ If you like or are using this project to learn or start your solution, please gi
 
 # 👐ecology
 
-- [sqlbreaker](github.com/chenquan/sqlbreaker): A low-code intrusion SQL breaker library, suitable for any relational
-  database (Sqlite3, MySQL, Oracle, SQL Server,
-  PostgreSQL, TiDB, etc.) and ORM libraries for various relational database (gorm, xorm, sqlx, etc.)
-- [sqlplus](github.com/chenquan/sqlplus): A sql enhancement tool library based on database/sql/driver
+- [sqlbreaker](https://github.com/chenquan/sqlbreaker): A low-code intrusion SQL breaker library, suitable for any
+  relational database (Sqlite3, MySQL, Oracle, SQL Server, PostgreSQL, TiDB, etc.) and ORM libraries for various
+  relational database (gorm, xorm, sqlx, etc.)
+- [sqlplus](https://github.com/chenquan/sqlplus): A sql enhancement tool library based on `database/sql/driver`
