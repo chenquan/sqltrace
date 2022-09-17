@@ -168,7 +168,7 @@ func main() {
 
 If you like or are using this project to learn or start your solution, please give it a star⭐. Thanks!
 
-# 👐ecology
+# 👐ecosystem
 
 - [sqlbreaker](https://github.com/chenquan/sqlbreaker): A low-code intrusion library that provides SQL breaker capabilities, suitable for any
   relational database (Sqlite3, MySQL, Oracle, SQL Server, PostgreSQL, TiDB, etc.) and ORM libraries for various
