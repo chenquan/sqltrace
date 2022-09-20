@@ -52,10 +52,14 @@ func NewTraceHook(c Config) *Hook {
 }
 
 func (h *Hook) BeforeClose(ctx context.Context, err error) (context.Context, error) {
+	ctx, _ = h.startSpan(ctx, "close")
+
 	return ctx, err
 }
 
 func (h *Hook) AfterClose(ctx context.Context, err error) (context.Context, error) {
+	h.endSpan(ctx, err)
+
 	return ctx, err
 }
 
