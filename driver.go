@@ -23,6 +23,5 @@ import (
 )
 
 func NewDriver(c Config, d driver.Driver) driver.Driver {
-	StartAgent(c)
 	return sqlplus.New(d, NewTraceHook(c))
 }

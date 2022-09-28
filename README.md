@@ -3,6 +3,8 @@
 A low-code intrusion library that provides SQL tracing capabilities, suitable for any relational database (Sqlite3, MySQL, Oracle, SQL Server,
 PostgreSQL, TiDB, TDengine, etc.) and ORM libraries for various relational database (gorm, xorm, sqlx, etc.)
 
+> Unstable, use with caution in production environment
+
 # 😜installation
 
 ```shell
@@ -105,11 +107,7 @@ import (
 func main() {
 	// Create a sqlite3 driver with link tracking
 	driver := sqltrace.NewDriver(sqltrace.Config{
-		Name:           "sqlite3_trace",
 		DataSourceName: "sqlite3",
-		Endpoint:       "http://localhost:14268/api/traces",
-		Sampler:        1,
-		Batcher:        "jaeger",
 	}, &sqlite3.SQLiteDriver{})
 	defer sqltrace.StopAgent()
 

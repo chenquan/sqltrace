@@ -19,10 +19,6 @@ package sqltrace
 type (
 	// Config represents a tracing configuration.
 	Config struct {
-		Name           string
 		DataSourceName string
-		Endpoint       string
-		Sampler        float64
-		Batcher        string
 	}
 )
