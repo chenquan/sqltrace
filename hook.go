@@ -197,11 +197,6 @@ func (h *Hook) startSpan(ctx context.Context, method string) (context.Context, t
 		spanStartOptions = append(spanStartOptions, trace.WithLinks(trace.LinkFromContext(prepareContext)))
 	}
 
-	txContext := sqlplus.TxContextFromContext(ctx)
-	if txContext != nil {
-		spanStartOptions = append(spanStartOptions, trace.WithLinks(trace.LinkFromContext(txContext)))
-	}
-
 	start, span := tracer.Start(ctx,
 		spanName,
 		spanStartOptions...,

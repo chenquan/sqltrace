@@ -1,5 +1,5 @@
-github.com/chenquan/sqlplus v0.2.0 h1:pMTIYoJfZ9wUE5wmqLkfkEVTjfX7m7nnGg/7LLEjEes=
-github.com/chenquan/sqlplus v0.2.0/go.mod h1:5CnLnO6rlxUVA06pZVNkaV1hvm1rSPhEYCNbf41etkU=
+github.com/chenquan/sqlplus v0.3.0 h1:ySOnnbdzDVYJQaVSvbv8Psk+ZHdRxtHkNc7s4DFmZ7k=
+github.com/chenquan/sqlplus v0.3.0/go.mod h1:qsBOsUzPCWOk+rRz48A1WhD9mtaeOzavn68zhdoLzeY=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
